@@ -1,426 +1,140 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>스마트 건설안전 포털</title>
-  <!-- FontAwesome (아이콘용) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trois - Official Site</title>
+    <style>
+        /* 기본 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
 
-    body {
-      background-color: #f4f6f9;
-      color: #333;
-      padding-bottom: 60px;
-    }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    /* 1. Header Area */
-    header {
-      background-color: #1e293b;
-      color: #ffffff;
-      padding: 30px 40px 80px 40px;
-      position: relative;
-    }
+        /* 카드 컨테이너 */
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.7);
+        }
 
-    .badge-pill {
-      display: inline-block;
-      background-color: #0d9488;
-      color: #fff;
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
+        /* 프로필 이미지/아바타 영역 */
+        .avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
 
-    .header-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+        /* 텍스트 스타일 */
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
 
-    .header-sub-tags {
-      display: flex;
-      gap: 15px;
-      font-size: 0.85rem;
-      color: #94a3b8;
-    }
+        .subtitle {
+            font-size: 0.95rem;
+            color: #38bdf8;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
 
-    .header-sub-tags span i {
-      margin-right: 4px;
-    }
+        p.desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-    /* QR Code Widget */
-    .qr-widget {
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+        /* 링크 버튼 목록 */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-    .qr-box {
-      width: 60px;
-      height: 60px;
-      background-color: #fff;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1e293b;
-      font-size: 2rem;
-    }
+        .link-btn {
+            display: block;
+            padding: 14px;
+            background: #334155;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
 
-    .qr-info {
-      font-size: 0.75rem;
-    }
+        .link-btn:hover {
+            background: #6366f1;
+            border-color: #818cf8;
+            transform: scale(1.02);
+        }
 
-    .qr-info .qr-title {
-      color: #94a3b8;
-      font-weight: 700;
-      margin-bottom: 2px;
-      text-transform: uppercase;
-    }
-
-    .qr-info .qr-desc {
-      color: #ffffff;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .qr-info .qr-zoom {
-      color: #64748b;
-      font-size: 0.7rem;
-    }
-
-    /* 2. Hero Banner Card */
-    .hero-container {
-      max-width: 1200px;
-      margin: -50px auto 0 auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero-card {
-      background-color: #2563eb;
-      color: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
-    }
-
-    .hero-icon {
-      width: 64px;
-      height: 64px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      flex-shrink: 0;
-    }
-
-    .hero-text h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero-text p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #dbeafe;
-    }
-
-    /* 3. Main Content & Filters */
-    .main-container {
-      max-width: 1200px;
-      margin: 40px auto 0 auto;
-      padding: 0 20px;
-    }
-
-    .filter-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .filter-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn-filter {
-      border: none;
-      background-color: #ffffff;
-      color: #475569;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      transition: all 0.2s;
-    }
-
-    .btn-filter.active {
-      background-color: #0f172a;
-      color: #ffffff;
-    }
-
-    .btn-filter:hover:not(.active) {
-      background-color: #f1f5f9;
-    }
-
-    .search-box {
-      position: relative;
-      width: 280px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 10px 16px 10px 38px;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      outline: none;
-      background-color: #ffffff;
-    }
-
-    .search-box i {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
-
-    /* 4. Tool Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background-color: #ffffff;
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid #f1f5f9;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      background-color: #eff6ff;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #3b82f6;
-      font-size: 1.2rem;
-    }
-
-    .tag-badge {
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-weight: 600;
-      background-color: #e0f2fe;
-      color: #0284c7;
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 8px;
-    }
-
-    .card-desc {
-      font-size: 0.88rem;
-      color: #64748b;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    .card-footer {
-      border-top: 1px solid #f1f5f9;
-      padding-top: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card-footer a {
-      text-decoration: none;
-      color: #2563eb;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card-footer a:hover {
-      color: #1d4ed8;
-    }
-  </style>
+        /* 푸터 */
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="header-top">
-      <div>
-        <span class="badge-pill">• 스마트 건설안전 통합 강의 포털</span>
-        <h1 class="header-title">스마트 건설안전 포털</h1>
-        <div class="header-sub-tags">
-          <span><i class="fa-regular fa-square-check"></i> 건설안전공학</span>
-          <span>|</span>
-          <span><i class="fa-solid fa-robot"></i> 생성형 AI 위험성 평가</span>
-          <span>|</span>
-          <span><i class="fa-solid fa-microchip"></i> 스마트 안전 기술</span>
+    <div class="card">
+        <!-- 프로필 아이콘 (이모지 변경 가능) -->
+        <div class="avatar">🚀</div>
+
+        <!-- 타이틀 및 설명 -->
+        <h1>Trois World</h1>
+        <div class="subtitle">Developer & Creator</div>
+        <p class="desc">
+            안녕하세요! 개인 프로젝트와 기록을 남기는 공식 공간입니다. 자유롭게 둘러보세요.
+        </p>
+
+        <!-- 연결 링크 버튼 -->
+        <div class="links">
+            <a href="https://github.com/j801027-code" target="_blank" class="link-btn">🐱 GitHub 프로필 방문하기</a>
+            <a href="https://github.com/j801027-code/trois" target="_blank" class="link-btn">📂 저장소(Repository) 보기</a>
+            <a href="mailto:your-email@example.com" class="link-btn">✉️ 이메일 보내기</a>
         </div>
-      </div>
-      
-      <!-- QR Code Access Widget -->
-      <div class="qr-widget">
-        <div class="qr-box">
-          <i class="fa-solid fa-qrcode"></i>
-        </div>
-        <div class="qr-info">
-          <div class="qr-title">Mobile Access</div>
-          <div class="qr-desc">스마트폰 QR 접속</div>
-          <div class="qr-zoom">클릭하여 확대보기 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
-        </div>
-      </div>
+
+        <footer>
+            © Trois. All rights reserved.
+        </footer>
     </div>
-  </header>
-
-  <!-- Hero Card -->
-  <div class="hero-container">
-    <div class="hero-card">
-      <div class="hero-icon">
-        <i class="fa-solid fa-graduation-cap"></i>
-      </div>
-      <div class="hero-text">
-        <h2>안녕하세요, 김성남입니다.</h2>
-        <p>본 포털은 스마트 건설안전 및 공학 강의를 위한 통합 교육 플랫폼입니다. 교육생 여러분의 실무 역량 강화를 위해 직접 개발한 <strong>AI 위험성 평가 에이전트, 공학 해석 도구 및 실습 자료</strong>를 제공합니다.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content Area -->
-  <main class="main-container">
-    <!-- Filter & Search Bar -->
-    <div class="filter-bar">
-      <div class="filter-buttons">
-        <button class="btn-filter active"><i class="fa-solid fa-border-all"></i> 전체보기</button>
-        <button class="btn-filter"><i class="fa-solid fa-robot"></i> 건설안전 & AI</button>
-        <button class="btn-filter"><i class="fa-solid fa-wrench"></i> 실무 & 생성형 AI 도구</button>
-        <button class="btn-filter"><i class="fa-solid fa-gamepad"></i> 강의용 게임 & 이벤트</button>
-      </div>
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="도구 또는 게임 검색...">
-      </div>
-    </div>
-
-    <!-- Cards Grid -->
-    <div class="cards-grid">
-      <!-- Card 1 -->
-      <div class="card">
-        <div>
-          <div class="card-header">
-            <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <span class="tag-badge">스마트 안전</span>
-          </div>
-          <h3 class="card-title">스마트 건설안전 (PE-Safety)</h3>
-          <p class="card-desc">건설안전 실무 및 전문적인 안전 관리를 위한 특화 가이드 및 자료</p>
-        </div>
-        <div class="card-footer">
-          <a href="#">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="card">
-        <div>
-          <div class="card-header">
-            <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-            <span class="tag-badge">AI 법률</span>
-          </div>
-          <h3 class="card-title">건설안전 법령 에이전트</h3>
-          <p class="card-desc">건설기술인을 위한 실시간 스마트 건설안전 법령 검색 및 안내 서비스</p>
-        </div>
-        <div class="card-footer">
-          <a href="#">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card">
-        <div>
-          <div class="card-header">
-            <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-            <span class="tag-badge">위험성평가</span>
-          </div>
-          <h3 class="card-title">4M 위험성 평가 에이전트</h3>
-          <p class="card-desc">현장 사진을 기반으로 4M(인적, 기계적, 작업적, 관리적) 위험 요인을 분석하는 전문 도구</p>
-        </div>
-        <div class="card-footer">
-          <a href="#">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </main>
 
 </body>
 </html>
